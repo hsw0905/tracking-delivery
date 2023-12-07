@@ -1,0 +1,24 @@
+version: '3.8'
+
+volumes:
+  test_volume:
+
+services:
+  mysql:
+    image: mysql:8.2.0
+    container_name: tracking-delivery
+    volumes:
+      - test_volume:/var/lib/data
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=1234
+      - MYSQL_DATABASE=tracking-delivery
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+
+  redis:
+    image: redis:7.2
+    ports:
+      - "6379:6379"
