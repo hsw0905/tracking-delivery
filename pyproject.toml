@@ -7,7 +7,18 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
+flask = "^3.0.0"
+pydantic-settings = "^2.1.0"
+pydantic = "^2.5.2"
+inject = "^5.2.0"
+flask-sqlalchemy = "^3.1.1"
+requests = "^2.31.0"
+celery = "^5.3.6"
+flower = "^2.0.1"
 
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.3"
 
 [build-system]
 requires = ["poetry-core"]
