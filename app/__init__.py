@@ -14,7 +14,6 @@ def init_config(app: Flask, config_name: str):
 
 
 def init_db(app: Flask, database: SQLAlchemy) -> None:
-    app.config['SQLALCHEMY_ECHO'] = False
     database.init_app(app)
 
 

@@ -18,7 +18,11 @@ services:
       - --character-set-server=utf8mb4
       - --collation-server=utf8mb4_unicode_ci
 
-  redis:
-    image: redis:7.2
+  delivery-tracker:
+    build:
+      context: docker/delivery-tracker
+      dockerfile: Dockerfile
+    container_name: delivery-tracker
+    hostname: delivery-tracker
     ports:
-      - "6379:6379"
+      - "4000:4000"
