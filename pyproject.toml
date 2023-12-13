@@ -20,6 +20,8 @@ redis = "^5.0.1"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.4.3"
+factory-boy = "^3.3.0"
+pytest-factoryboy = "^2.6.0"
 
 [build-system]
 requires = ["poetry-core"]

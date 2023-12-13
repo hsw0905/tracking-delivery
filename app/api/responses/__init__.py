@@ -1,0 +1,15 @@
+from http import HTTPStatus
+
+from flask import jsonify
+
+from app.use_case_output import UseCaseFailureOutput
+
+
+def success_response(result):
+    return jsonify(**result), HTTPStatus.OK
+
+
+def failure_response(
+    output: UseCaseFailureOutput, status_code: int = HTTPStatus.BAD_REQUEST
+):
+    return jsonify(detail=output.type, message=output.message), status_code

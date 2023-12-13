@@ -1,8 +1,11 @@
 from inject import clear_and_configure, Binder
 
+from core.domains.delivery.repository.delivery_repository import DeliveryRepository
+
 
 def configure_app(binder: Binder):
     service_to_bind = [
+        DeliveryRepository,
     ]
 
     for service in service_to_bind:

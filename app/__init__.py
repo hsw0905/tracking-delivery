@@ -5,7 +5,8 @@ from flask_sqlalchemy import SQLAlchemy
 
 from app.api.views import api
 from app.config import config, Config
-from app.extensions.database import db
+from app.extensions.database.sqlalchemy import db
+from app.extensions.ioc_container import init_provider
 
 
 def init_config(app: Flask, config_name: str):
@@ -32,7 +33,7 @@ def create_app(config_name: str = "default") -> Flask:
     with app.app_context():
         init_blueprint(app)
         init_db(app, db)
-        # init_provider()
+        init_provider()
 
     print(f"\n💌💌💌Flask Config is '{config_name}'")
     return app

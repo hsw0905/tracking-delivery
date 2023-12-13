@@ -45,6 +45,7 @@ class ProductionConfig(Config):
 config = {
     "default": LocalConfig,
     "local": LocalConfig,
+    "testing": TestConfig,
     "development": DevelopmentConfig,
     "production": ProductionConfig
 }
