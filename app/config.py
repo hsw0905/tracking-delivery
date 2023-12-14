@@ -23,6 +23,11 @@ class LocalConfig(Config):
 
     SQLALCHEMY_DATABASE_URI = os.getenv("DEV_DATABASE_URL") or "sqlite:///:memory:"
 
+    DELIVERY_TRACKER_URI = os.getenv("DELIVERY_TRACKER_URI") or "http://localhost:4000"
+    DELIVERY_TRACKER_AUTH_URI = "https://auth.tracker.delivery"
+    TRACK_CLIENT_ID = os.getenv("TRACK_CLIENT_ID")
+    TRACK_CLIENT_SECRET = os.getenv("TRACK_CLIENT_SECRET")
+
 
 class TestConfig(Config):
     ENV = "testing"

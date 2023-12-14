@@ -10,3 +10,8 @@ class UpdateDeliveryDto(BaseModel):
     parcel_num: str | None
     exchange_reason: str | None
     return_reason: str | None
+
+
+class TrackDeliveryDto(BaseModel):
+    carrier_id: str
+    tracking_number: str

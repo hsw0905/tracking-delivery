@@ -29,3 +29,4 @@ def test_should_patch_status(session: scoped_session[Session]):
     result = repository.find_by_id(delivery_id=delivery.id)
 
     assert result.status == DeliveryStatus.DELIVERING.value[0]
+

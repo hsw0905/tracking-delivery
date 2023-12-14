@@ -1,11 +1,13 @@
 from inject import clear_and_configure, Binder
 
 from core.domains.delivery.repository.delivery_repository import DeliveryRepository
+from core.domains.delivery.use_case.v1.delivery_use_case import UpdateDeliveryUseCase
 
 
 def configure_app(binder: Binder):
     service_to_bind = [
         DeliveryRepository,
+        UpdateDeliveryUseCase,
     ]
 
     for service in service_to_bind:

@@ -1,4 +1,4 @@
-from sqlalchemy import select, update
+from sqlalchemy import select, update, and_
 from sqlalchemy.exc import DatabaseError
 
 from app.exceptions.base import InternalServerErrorException
@@ -52,3 +52,19 @@ class DeliveryRepository:
             logger.error(f"[DeliveryRepository][patch]: error, {e.detail}")
             session.rollback()
             raise InternalServerErrorException
+
+    def find_by_parcel_company_id_and_number(self, parcel_company_id: str, parcel_num: str) -> DeliveryEntity | None:
+        statement = (
+            select(DeliveryModel).where(
+                and_(
+                    DeliveryModel.parcel_company_id == parcel_company_id,
+                    DeliveryModel.parcel_num == parcel_num
+                )
+            )
+        )
+
+        response = session.execute(statement).scalar()
+
+        if response:
+            return response.to_entity()
+        return None

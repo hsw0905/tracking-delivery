@@ -2,7 +2,7 @@ from pydantic import BaseModel, field_validator, ValidationError
 
 from app.exceptions.base import InvalidRequestException
 from app.utils.log_helper import logger_
-from core.domains.delivery.dto.delivery_dto import UpdateDeliveryDto
+from core.domains.delivery.dto.delivery_dto import UpdateDeliveryDto, TrackDeliveryDto
 
 logger = logger_.getLogger(__name__)
 
@@ -74,5 +74,29 @@ class UpdateDeliveryRequestSchema:
         except ValidationError as e:
             logger.error(
                 f"[UpdateDeliveryRequestSchema][validate_request_and_make_dto] error : {e}"
+            )
+            raise InvalidRequestException(message=e.errors())
+
+
+class TrackDeliverySchema(BaseModel):
+    carrier_id: str
+    tracking_number: str
+
+
+class TrackDeliveryRequestSchema:
+    def __init__(self, carrier_id: str, tracking_number: str) -> None:
+        self.carrier_id = carrier_id,
+        self.tracking_number = tracking_number
+
+    def validate_request_and_make_dto(self):
+        try:
+            schema = TrackDeliverySchema(
+                carrier_id=self.carrier_id,
+                tracking_number=self.tracking_number
+            ).model_dump()
+            return TrackDeliveryDto(**schema)
+        except ValidationError as e:
+            logger.error(
+                f"[TrackDeliveryRequestSchema][validate_request_and_make_dto] error : {e}"
             )
             raise InvalidRequestException(message=e.errors())
