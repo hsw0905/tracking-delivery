@@ -9,7 +9,7 @@ from app.api.responses import failure_response
 from app.api.responses.presenters.v1.delivery_presenter import UpdateDeliveryPresenter, TrackDeliveryPresenter
 from app.exceptions.base import InvalidRequestException
 from app.use_case_output import UseCaseFailureOutput, FailureType
-from core.domains.delivery.use_case.v1.delivery_use_case import UpdateDeliveryUseCase
+from core.domains.delivery.use_case.v1.delivery_use_case import UpdateDeliveryUseCase, TrackDeliveryUseCase
 
 
 @api.patch("/v1/deliveries/<int:delivery_id>")
@@ -46,4 +46,4 @@ def track_callback_view():
                 message=f"Invalid request parameter: {e.message}"
             )
         )
-    return TrackDeliveryPresenter().transform()
+    return TrackDeliveryPresenter().transform(TrackDeliveryUseCase().execute(dto=dto))
