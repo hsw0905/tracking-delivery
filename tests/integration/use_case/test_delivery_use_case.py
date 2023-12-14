@@ -19,7 +19,7 @@ def test_should_patch_status(session: scoped_session[Session]):
         parcel_comp_id=None,
         parcel_num=None,
         exchange_reason=None,
-        return_reason=None
+        return_reason=None,
     )
     repository = DeliveryRepository()
     use_case = UpdateDeliveryUseCase()
@@ -29,4 +29,3 @@ def test_should_patch_status(session: scoped_session[Session]):
     result = repository.find_by_id(delivery_id=delivery.id)
 
     assert result.status == DeliveryStatus.DELIVERING.value[0]
-

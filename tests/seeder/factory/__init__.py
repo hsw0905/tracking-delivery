@@ -19,4 +19,3 @@ class DeliveryModelFactory(BaseFactory):
     parcel_company_name = "CJ대한통운"
     parcel_company_id = "kr.cjlogistics"
     parcel_num = "1234567890"
-

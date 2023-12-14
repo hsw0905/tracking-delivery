@@ -20,7 +20,9 @@ class DeliveryModel(db.Model):
     parcel_company_id = mapped_column(VARCHAR(50))
     parcel_num = mapped_column(VARCHAR(50))
     created_at = mapped_column(DateTime, default=func.now(), nullable=False)
-    updated_at = mapped_column(DateTime, default=func.now(), onupdate=func.now(), nullable=False)
+    updated_at = mapped_column(
+        DateTime, default=func.now(), onupdate=func.now(), nullable=False
+    )
 
     def to_entity(self) -> DeliveryEntity:
         return DeliveryEntity(
@@ -31,5 +33,5 @@ class DeliveryModel(db.Model):
             parcel_company_id=self.parcel_company_id,
             parcel_num=self.parcel_num,
             created_at=self.created_at,
-            updated_at=self.updated_at
+            updated_at=self.updated_at,
         )

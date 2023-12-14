@@ -4,16 +4,17 @@ from pydantic import ValidationError
 
 from app.api.responses import failure_response, success_response
 from app.use_case_output import UseCaseSuccessOutput, UseCaseFailureOutput, FailureType
-from core.domains.delivery.schema.delivery_schema import UpdateDeliveryResponseSchema, TrackDeliveryResponseSchema
+from core.domains.delivery.schema.delivery_schema import (
+    UpdateDeliveryResponseSchema,
+    TrackDeliveryResponseSchema,
+)
 
 
 class UpdateDeliveryPresenter:
     def transform(self, output: UseCaseSuccessOutput | UseCaseFailureOutput):
         if isinstance(output, UseCaseSuccessOutput):
             try:
-                schema = UpdateDeliveryResponseSchema(
-                    result=output.type
-                )
+                schema = UpdateDeliveryResponseSchema(result=output.type)
             except ValidationError as e:
                 return failure_response(
                     UseCaseFailureOutput(
@@ -36,9 +37,7 @@ class TrackDeliveryPresenter:
     def transform(self, output: UseCaseSuccessOutput | UseCaseFailureOutput):
         if isinstance(output, UseCaseSuccessOutput):
             try:
-                schema = TrackDeliveryResponseSchema(
-                    result=output.type
-                )
+                schema = TrackDeliveryResponseSchema(result=output.type)
             except ValidationError as e:
                 return failure_response(
                     UseCaseFailureOutput(

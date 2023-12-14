@@ -16,9 +16,7 @@ def test_should_patch_status(session: scoped_session[Session], app, client) -> N
                 "tracking-delivery.update_delivery_view",
                 delivery_id=delivery.id,
             ),
-            json={
-                "status": DeliveryStatus.DELIVERING.value[0]
-            }
+            json={"status": DeliveryStatus.DELIVERING.value[0]},
         )
 
     repository = DeliveryRepository()

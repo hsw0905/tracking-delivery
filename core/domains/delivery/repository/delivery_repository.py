@@ -16,9 +16,7 @@ class DeliveryRepository:
         if not delivery_id:
             return None
 
-        statement = (
-            select(DeliveryModel).where(DeliveryModel.id == delivery_id)
-        )
+        statement = select(DeliveryModel).where(DeliveryModel.id == delivery_id)
 
         response = session.execute(statement).scalar()
 
@@ -53,13 +51,13 @@ class DeliveryRepository:
             session.rollback()
             raise InternalServerErrorException
 
-    def find_by_parcel_company_id_and_number(self, parcel_company_id: str, parcel_num: str) -> DeliveryEntity | None:
-        statement = (
-            select(DeliveryModel).where(
-                and_(
-                    DeliveryModel.parcel_company_id == parcel_company_id,
-                    DeliveryModel.parcel_num == parcel_num
-                )
+    def find_by_parcel_company_id_and_number(
+        self, parcel_company_id: str, parcel_num: str
+    ) -> DeliveryEntity | None:
+        statement = select(DeliveryModel).where(
+            and_(
+                DeliveryModel.parcel_company_id == parcel_company_id,
+                DeliveryModel.parcel_num == parcel_num,
             )
         )
 
