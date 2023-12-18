@@ -26,3 +26,18 @@ services:
     hostname: delivery-tracker
     ports:
       - "4000:4000"
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: rabbitmq-stream
+    volumes:
+      - test_volume:/etc/rabbitmq/
+      - test_volume:/var/lib/rabbitmq/
+      - test_volume:/var/log/rabbitmq/
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_ERLANG_COOKIE: "RabbitMQ-My-Cookies"
+      RABBITMQ_DEFAULT_USER: "admin"
+      RABBITMQ_DEFAULT_PASS: "1234"
